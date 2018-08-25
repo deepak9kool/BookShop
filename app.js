@@ -7,7 +7,7 @@ var httpProxy = require('http-proxy');
 
 var app = express();
 
-//PROXY to SERVER
+// PROXY to SERVER
 var apiProxy = httpProxy.createProxyServer({
   target:'http://localhost:3003'
 })

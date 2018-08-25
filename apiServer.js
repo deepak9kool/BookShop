@@ -23,7 +23,7 @@ var mongoose=require('mongoose');
 mongoose.connect('mongodb://localhost:27017/bookshop');
 
 var db = mongoose.connection;
-db.on('error',console.error.bind(console, '# MongoDB - conmection error'));
+db.on('error',console.error.bind(console, '# MongoDB - conn ection error'));
 
 //SET UP SESSION
 app.use(session({
@@ -77,7 +77,7 @@ app.get('/books',function(req,res){
 app.delete('/books/:_id',function(req,res){
   var query = {_id : req.params._id};
   Books.remove(query,function(err,books){
-    if (err) throw err;
+    if (err) {console.log('# API DELETE BOOKS',err)};
     res.json(books);
   })
 })
@@ -100,6 +100,24 @@ app.put('/books/:_id',function(req,res){
   Books.findOneAndUpdate(query,update,options,function(err,books){
     if (err) throw err;
     res.json(books);
+  })
+})
+
+//GET BOOKS IMAGES API
+app.get('/images',function(req,res){
+  const imgFolder = __dirname+'/public/images'
+  //REQUIRE FILESYSTEM
+  var fs = require('fs');
+  fs.readdir(imgFolder,function(err,files){
+    if (err){
+      console.error(err);
+    }
+    const filesArr = [];
+    files.forEach(function(file){
+      filesArr.push({name:file})
+    })
+    //SEND THE JSON RESPONSE WITH ARRAY
+    res.json(filesArr);
   })
 })
 

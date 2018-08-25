@@ -3,9 +3,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { getBooks } from '../../actions/booksActions';
-import { Grid, Col, Row, Button } from 'react-bootstrap';
+import {Carousel, Grid, Col, Row } from 'react-bootstrap';
 import BookItem from './BookItem';
-import BooksForm from './BooksForm';
 import Cart from './Cart';
 
 class booksList extends Component {
@@ -21,6 +20,7 @@ class booksList extends Component {
                         _id={bookArr._id}
                         title={bookArr.title}
                         description={bookArr.description}
+                        images = {bookArr.images}
                         price={bookArr.price}
                     />
                 </Col>
@@ -29,12 +29,28 @@ class booksList extends Component {
         return (
             <Grid>
                 <Row>
+                    <Carousel>
+                      <Carousel.Item>
+                        <img style={{width:'900px',height:'300px'}} alt="900x300" src="/images/home1.jpg" />
+                        <Carousel.Caption>
+                          <h3>First slide label</h3>
+                          <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                      <Carousel.Item>
+                        <img style={{width:'900px',height:'300px'}} alt="900x300" src="/images/home2.jpg" />
+                        <Carousel.Caption>
+                          <h3>Second slide label</h3>
+                          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                        </Carousel.Caption>
+                      </Carousel.Item>
+                    </Carousel>
+                </Row>
+                <Row style={{marginTop:'15px'}}>
                     <Cart/>
                 </Row>
                 <Row style={{marginTop:'15px'}}>
-                <Col xs={12} sm={6}>
-                    <BooksForm/>
-                </Col>
+                
                     {booksList}
                 </Row>
             </Grid>

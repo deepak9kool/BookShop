@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Modal,Row,Col,Panel,Well ,Button,ButtonGroup,Label } from 'react-bootstrap';
 import { bindActionCreators } from 'redux';
-import { deleteCartItem,updateCart } from '../../actions/cartActions';
+import { deleteCartItem,updateCart,getCart } from '../../actions/cartActions';
 
 
 class Cart extends Component {
@@ -12,6 +12,9 @@ class Cart extends Component {
         this.state={
             show:false
         }
+    }
+    componentDidMount(){
+        this.props.getCart();
     }
 
     close(){
@@ -102,7 +105,7 @@ class Cart extends Component {
                       </Modal.Header>
                       <Modal.Body>
                         <h6>Your order has been saved</h6>
-                        <p>You will reive an email confirmation</p>
+                        <p>You will receive an email confirmation</p>
                       </Modal.Body>
                       <Modal.Footer>
                          <Col xs={6}>
@@ -124,7 +127,7 @@ function mapStateToProps(state){
     }
 }
 function mapDispatchToProps(dispatch){
-    return bindActionCreators({deleteCartItem,updateCart},dispatch)
+    return bindActionCreators({deleteCartItem,updateCart,getCart},dispatch)
 }
 
 export default connect(mapStateToProps,mapDispatchToProps)(Cart);

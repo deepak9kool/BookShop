@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Row, Col, Well, Button } from 'react-bootstrap';
+import { Image,Row, Col, Well, Button } from 'react-bootstrap';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { addToCart, updateCart } from '../../actions/cartActions';
@@ -7,11 +7,26 @@ import { addToCart, updateCart } from '../../actions/cartActions';
 
 class BookItem extends Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            isClicked:false
+        }
+    }
+
+    onReadMore(){
+        this.setState({
+            isClicked:true
+        })
+    }
+    
+
     handleCart(){
         const book = [...this.props.cart,{
             _id:this.props._id,
             title:this.props.title,
             description:this.props._id,
+            images:this.props.images,
             price:this.props.price,
             quantity:1
 
@@ -45,10 +60,18 @@ class BookItem extends Component {
         return (
             <Well>
                 <Row>
-                    <Col xs={12} key={this.props._id}>
+                    <Col xs={12} md={4}>
+                        <Image src={this.props.images} responsive/>
+                    </Col>
+                    <Col xs={12} sm={8} key={this.props._id}>
                         <h6>{this.props.title}</h6>
-                        <p>{this.props.description}</p>
-                        <h6>{this.props.price}</h6>
+                        <p>{(this.props.description.length>50 && this.state.isClicked===false)?
+                        (this.props.description.substring(0,50)):(this.props.description)}</p>
+                        <button className="link" onClick={this.onReadMore.bind(this)}>
+                            {(this.props.description.length>50 && this.state.isClicked===false && this.props.description!==null)?
+                                ('...Read more'):('')}
+                        </button>
+                        <h6>usd. {this.props.price}</h6>
                         <Button 
                             bsStyle='primary'
                             onClick={this.handleCart.bind(this)}> 
