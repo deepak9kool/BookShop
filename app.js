@@ -20,7 +20,7 @@ app.use(logger('dev'));
 app.use(express.static(path.join(__dirname, 'public')));
 
 
-app.get('/',function(req,res){
+app.get('*',function(req,res){
   res.sendFile(path.resolve(__dirname,'public','indext.html'));
 });
 

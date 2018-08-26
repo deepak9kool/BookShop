@@ -20,7 +20,10 @@ app.use(cookieParser());
 //API's
 
 var mongoose=require('mongoose');
-mongoose.connect('mongodb://localhost:27017/bookshop');
+//local
+// mongoose.connect('mongodb://localhost:27017/bookshop');
+//mlab
+mongoose.connect('mongodb://testUser:test99@ds131942.mlab.com:31942/booksshop');
 
 var db = mongoose.connection;
 db.on('error',console.error.bind(console, '# MongoDB - conn ection error'));
