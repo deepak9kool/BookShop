@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www & node apiServer"
   },
   "devDependencies": {
     "babel-plugin-transform-es2015-destructuring": "^6.23.0",
@@ -25,6 +25,7 @@
     "debug": "~2.6.9",
     "express": "~4.16.0",
     "express-session": "^1.15.6",
+    "heroku": "^7.12.2",
     "http-errors": "~1.6.2",
     "http-proxy": "^1.17.0",
     "jade": "~1.11.0",
